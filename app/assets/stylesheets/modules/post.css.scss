@@ -1,0 +1,52 @@
+
+.post__tags-list {
+  float: left;
+  height: auto;
+  .tag, .tag:hover {
+    padding: 6px 13px;
+    font-size: 12px;
+  }
+  margin: auto auto 50px auto;
+}
+
+.std__button {
+  @extend .btn;
+  @extend .btn-primary;
+  @extend .btn-small;
+}
+
+.post__button--add, .post__button--edit, .post__button--delete {
+  @extend .std__button;
+}
+
+.post__button--add {
+  @extend .pull-right
+}
+
+.post__button--delete {
+  @extend .btn-danger;
+}
+
+
+.post__button--edit {
+  font-size: 12px;
+}
+
+.post--short-size {
+  border-bottom: 1px solid #f2f2f2;
+}
+
+.post--short-size {
+  margin-bottom: 10px;
+  padding-bottom: 10px;
+}
+
+.post--full-size {
+  .post__body {
+    margin: 15px 0;
+  }
+}
+
+.post__author {
+  margin: 2px;
+}
