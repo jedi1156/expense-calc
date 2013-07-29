@@ -3,4 +3,15 @@
 
 APP_PATH = File.expand_path('../../config/application',  __FILE__)
 require File.expand_path('../../config/boot',  __FILE__)
+require "rails/commands/server"
+
+module Rails
+  class Server
+    alias :default_options_alias :default_options
+    def default_options
+      default_options_alias.merge!(:Port => 11112)
+    end  
+  end
+end
+
 require 'rails/commands'
