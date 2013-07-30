@@ -3,10 +3,14 @@ class User
   include Mongoid::Timestamps
 
   devise :database_authenticatable, :registerable,
-  :recoverable, :rememberable, :trackable, :validatable
+  :recoverable, :rememberable, :trackable, :validatable,
+  :omniauthable, :omniauth_providers => [:facebook]
 
   field :email,              type: String, default: ""
   field :encrypted_password, type: String, default: ""
+  field :name, type: String
+  field :provider, type: String
+  field :uid, type: String
 
   validates_presence_of :email
   validates_presence_of :encrypted_password
@@ -27,17 +31,17 @@ class User
 
   index({ email: 1 }, { unique: true, background: true })
   validates :name, presence: true
-  validates :nickname, uniqueness: true, if: proc { |u| u.nickname }
-  attr_accessible :name, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at, :nickname
+  attr_accessible :name, :provider, :uid, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at
 
-  field :name, type: String
-  field :nickname, type: String
-
-  def owner? post
-    posts.include? post
-  end
-
-  def to_s
-    nickname.present? ? nickname : name
+  def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
+    user = User.where(:provider => auth.provider, :uid => auth.uid).first
+    unless user
+      user = User.create(name: auth.extra.raw_info.name,
+                        provider: auth.provider,
+                        uid: auth.uid,
+                        email: auth.info.email,
+                        password: Devise.friendly_token[0,20])
+    end
+    user
   end
 end
