@@ -2,11 +2,11 @@
 
 %p
   %b Name:
-  = @item.name
+  = item.name
 %p
   %b Bought at:
-  = @item.bought_at
+  = item.bought_at
 
-= link_to 'Edit', edit_item_path(@item)
+= link_to 'Edit', edit_reckoning_item_path(reckoning, item)
 \|
-= link_to 'Back', items_path
+= link_to 'Back', reckoning_items_path(reckoning)
