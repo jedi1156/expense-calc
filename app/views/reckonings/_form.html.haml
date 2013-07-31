@@ -1,0 +1,10 @@
+= simple_form_for(@reckoning) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :created_at
+    = f.input :report_valid
+
+  .form-actions
+    = f.button :submit

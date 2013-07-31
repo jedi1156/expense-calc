@@ -1,0 +1,23 @@
+%h1 Listing reckonings
+
+%table
+  %tr
+    %th Name
+    %th Created at
+    %th Report valid
+    %th
+    %th
+    %th
+
+  - @reckonings.each do |reckoning|
+    %tr
+      %td= reckoning.name
+      %td= reckoning.created_at
+      %td= reckoning.report_valid
+      %td= link_to 'Show', reckoning
+      %td= link_to 'Edit', edit_reckoning_path(reckoning)
+      %td= link_to 'Destroy', reckoning, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Reckoning', new_reckoning_path

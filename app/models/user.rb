@@ -33,6 +33,10 @@ class User
   validates :name, presence: true
   attr_accessible :name, :provider, :uid, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at
 
+  has_many :user_reckonings
+
+
+
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
     unless user
