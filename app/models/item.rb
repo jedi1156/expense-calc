@@ -6,5 +6,5 @@ class Item
   field :valid, type: Boolean
 
   belongs_to :reckoning
-  has_many :expenses
+  has_many :expenses, dependent: :destroy
 end

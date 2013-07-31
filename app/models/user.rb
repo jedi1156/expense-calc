@@ -33,7 +33,7 @@ class User
   validates :name, presence: true
   attr_accessible :name, :provider, :uid, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at
 
-  has_many :user_reckonings
+  has_many :user_reckonings, dependent: :destroy
 
 
 

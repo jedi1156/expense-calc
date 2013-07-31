@@ -5,11 +5,10 @@ ExpenseCalc::Application.routes.draw do
 	root to: "home#index"
 	devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-	resources :users do
-		resources :user_reckonings
-	end
+	resources :users
 
 	resources :reckonings do
+		resources :user_reckonings
 		resources :items
 	end
 

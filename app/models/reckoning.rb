@@ -5,7 +5,7 @@ class Reckoning
   field :created_at, type: Time, default: Time.current
   field :report_valid, type: Boolean
 
-  has_many :user_reckonings
-  has_many :items
-  has_many :flows
+  has_many :user_reckonings, dependent: :destroy
+  has_many :items, dependent: :destroy
+  has_many :flows, dependent: :destroy
 end
