@@ -1,6 +1,8 @@
 class ReckoningsController < ApplicationController
   expose(:reckoning)
   expose(:user_reckonings) { current_user.user_reckonings.map { |r| r.reckoning } }
+  expose(:users_in_reckoning) { reckoning.user_reckonings.map { |ur| ur.user } }
+  
   def index
   end
 

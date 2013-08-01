@@ -8,4 +8,8 @@ class Reckoning
   has_many :user_reckonings, dependent: :destroy
   has_many :items, dependent: :destroy
   has_many :flows, dependent: :destroy
+
+  def users
+  	user_reckonings.map { |ur| ur.user }
+  end
 end

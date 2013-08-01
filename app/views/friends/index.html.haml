@@ -1,0 +1,8 @@
+%h2
+	Your friends
+%ul
+	- user_friends.each do |f|
+		%li
+			= f.to_s
+			= link_to "Unfriend", friend_path(f), method: :delete, data: { confirm: "Are you insane!? Think twice before doing that!" }
+= link_to "See friend requests", friend_requests_path

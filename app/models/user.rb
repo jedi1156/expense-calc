@@ -34,8 +34,12 @@ class User
   attr_accessible :name, :provider, :uid, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at
 
   has_many :user_reckonings, dependent: :destroy
+  has_many :invitations_for, class_name: "Invitation", inverse_of: :from_user, dependent: :destroy
+  has_many :invitations_from, class_name: "Invitation", inverse_of: :for_user, dependent: :destroy
 
-
+  has_and_belongs_to_many :friends, class_name: "User"
+  has_many :friend_requests_to, class_name: "FriendRequest", inverse_of: :from_user
+  has_many :friend_requests_from, class_name: "FriendRequest", inverse_of: :to_user
 
   def self.find_for_facebook_oauth(auth, signed_in_resource=nil)
     user = User.where(:provider => auth.provider, :uid => auth.uid).first
@@ -47,5 +51,13 @@ class User
                         password: Devise.friendly_token[0,20])
     end
     user
+  end
+
+  def find_user_reckoning(reckoning_id)
+    user_reckonings.detect { |ur| ur.reckoning_id == reckoning_id }
+  end
+
+  def to_s
+    name
   end
 end

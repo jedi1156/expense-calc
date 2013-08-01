@@ -1,0 +1,22 @@
+%h1 Listing item expenses
+
+%table
+  %tr
+    %th User
+    %th Paid
+    %th Used
+    %th
+    %th
+
+  - item_expenses.each do |expense|
+    %tr
+      %td= expense.user_reckoning.user.name
+      %td= expense.paid
+      %td= expense.used
+      %td= link_to "Edit", edit_item_expense_path(item, expense)
+      %td= link_to "Destroy", item_expense_path(item, expense), :method => :delete, :data => { :confirm => "Are you sure?" }
+
+%br
+
+= link_to "New Expense", new_item_expense_path(item)
+= link_to "Back", reckoning_item_path(reckoning, item)

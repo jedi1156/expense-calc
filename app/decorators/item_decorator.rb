@@ -1,5 +1,6 @@
 class ItemDecorator < Draper::Decorator
-  delegate_all
+	delegate_all
+	decorate :item
 
   # Define presentation-specific methods here. Helpers are accessed through
   # `helpers` (aka `h`). You can override attributes, for example:

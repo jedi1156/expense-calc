@@ -8,4 +8,12 @@ class Expense
 	belongs_to :item
 
 	validates :item, uniqueness: { scope: :user_reckoning }
+
+	def empty?
+		(paid == 0) && (used == 0)
+	end
+
+	def user
+		user_reckoning.user
+	end
 end

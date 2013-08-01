@@ -1,0 +1,14 @@
+%h1 New expense
+
+= simple_form_for [item, expense] do |f|
+	= f.error_notification
+
+	.form-inputs
+		= f.association :user_reckoning, collection: user_reckonings, label_method: :user_name, value_method: :id
+		= f.input :paid
+		= f.input :used
+
+	.form-actions
+		= f.button :submit
+
+= link_to 'Back', item_expenses_path(item)
