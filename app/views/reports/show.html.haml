@@ -1,0 +1,18 @@
+%h3 Report
+- if reckoning.report_generated_at
+	%p 
+		Generated at: 
+		= reckoning.report_generated_at
+= link_to "Reload", reckoning_report_path(reckoning), method: :post
+= link_to "Back to reckoning", reckoning_path(reckoning)
+
+%table
+	%tr
+		%th From user
+		%th To user
+		%th Value
+	- flows.each do |fl|
+		%tr
+			%td= fl.from
+			%td= fl.to
+			%td= fl.money_value

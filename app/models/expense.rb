@@ -2,8 +2,8 @@ class Expense
 	include Mongoid::Document
 	include MoneyRoutines
 
-	field :paid, type: Integer
-	field :used, type: Integer
+	field :paid, type: Integer, default: 0
+	field :used, type: Integer, default: 0
 
 	belongs_to :user_reckoning
 	belongs_to :item
@@ -16,6 +16,10 @@ class Expense
 
 	def user
 		user_reckoning.user
+	end
+
+	def value
+		paid - used
 	end
 
 	def set_values(expense)

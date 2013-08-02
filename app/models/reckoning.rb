@@ -3,7 +3,7 @@ class Reckoning
   field :name, type: String
   field :description, type: String
   field :created_at, type: Time, default: Time.current
-  field :report_valid, type: Boolean, default: false
+  field :report_generated_at, type: Time
 
   has_many :user_reckonings, dependent: :destroy
   has_many :items, dependent: :destroy

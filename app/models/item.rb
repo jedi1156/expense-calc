@@ -19,4 +19,8 @@ class Item
   def cost_valid?
   	cost == used
   end
+
+  def expense_of(user_reckoning)
+    expenses.detect { |ex| ex.user_reckoning == user_reckoning } || Expense.new(user_reckoning: user_reckoning)
+  end
 end

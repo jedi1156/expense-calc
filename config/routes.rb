@@ -12,6 +12,7 @@ ExpenseCalc::Application.routes.draw do
 	resources :reckonings do
 		resources :user_reckonings
 		resources :items
+		resource :report, only: [ :create, :show ]
 	end
 
 	resources :items do
