@@ -57,7 +57,14 @@ class ExpensesController < ApplicationController
 		else
 			paid = expense.paid
 		end
-		the_rest = (item.cost - expense.paid + paid) - (item.used - expense.used)
+
+		saved_value = if expense.new_record?
+			0
+		else
+			expense.value
+		end
+
+		the_rest = (item.cost + paid) - item.used - saved_value
 		render json: to_dolars(the_rest)
 	end
 end

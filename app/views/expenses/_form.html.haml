@@ -1,0 +1,14 @@
+= simple_form_for [item, expense] do |f|
+	= f.error_notification
+
+	.form-inputs
+		- if expense.new_record?
+			= f.association :user_reckoning, collection: new_user_reckonings, label_method: :user_name, value_method: :id, selected: new_user_reckonings.first
+		- else
+			= expense.user_name
+		= f.input :paid, input_html: { value: expense.money_paid, class: "expense--paid" }
+		= f.input :used, input_html: { value: expense.money_used, class: "expense--used" }
+		= link_to "Rest", rest_item_expense_path(item), { class: "expense--rest" }
+
+	.form-actions
+		= f.button :submit

@@ -19,5 +19,5 @@ ExpenseCalc::Application.routes.draw do
 		resources :expenses
 	end
 
-	get "/item/:item_id/expenses/:id/rest", to: "expenses#rest", as: :rest_item_expense
+	get "/item/:item_id/expenses/rest", to: "expenses#rest", as: :rest_item_expense
 end

@@ -1,19 +1,14 @@
 %p#notice= notice
 
 .reckoning
-	%p
-		%b Name:
-		= reckoning.name
+	%h2= reckoning.name
 	%p
 		%b Created at:
 		= l reckoning.created_at
 	%p
-		%b Description:
 		= reckoning.description
 
 	= link_to "Edit", edit_reckoning_path(reckoning)
-	\|
-	= link_to "Items", reckoning_items_path(reckoning)
 	\|
 	= link_to "Report", reckoning_report_path(reckoning)
 	\|
@@ -25,3 +20,6 @@
 			%li
 				= u
 	= link_to "Invite friends", edit_reckoning_path(reckoning)
+.item--list
+	%h4= link_to "Items bought", reckoning_items_path(reckoning)
+	= render "items/items", items: items

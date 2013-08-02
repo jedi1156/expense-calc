@@ -3,6 +3,7 @@ class ReckoningsController < ApplicationController
   expose(:your_reckonings) { current_user.user_reckonings.map { |r| r.reckoning } }
   expose(:users_in_reckoning) { reckoning.user_reckonings.map { |ur| ur.user } }
   expose(:new_invitations) { current_user.friends - reckoning.users }
+  expose_decorated(:items) { reckoning.items }
   
   def index
   end

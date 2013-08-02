@@ -2,7 +2,7 @@
 - if reckoning.report_generated_at
 	%p 
 		Generated at: 
-		= reckoning.report_generated_at
+		= l reckoning.report_generated_at
 = link_to "Reload", reckoning_report_path(reckoning), method: :post
 = link_to "Back to reckoning", reckoning_path(reckoning)
 

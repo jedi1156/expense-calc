@@ -1,7 +1,7 @@
 class ItemsController < ApplicationController
   expose(:reckoning)
   expose_decorated(:item)
-  expose(:reckoning_items) { reckoning.items }
+  expose_decorated(:items) { reckoning.items }
 
   def index
   end

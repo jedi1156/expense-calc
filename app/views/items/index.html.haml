@@ -1,22 +1,5 @@
 %h1 Listing items
 
-%table
-  %tr
-    %th Name
-    %th Bought at
-    %th
-    %th
-    %th
+= render "items", items: items
 
-  - reckoning_items.each do |item|
-    %tr
-      %td= item.name
-      %td= item.bought_at
-      %td= link_to "Show", reckoning_item_path(reckoning, item)
-      %td= link_to "Edit", edit_reckoning_item_path(reckoning, item)
-      %td= link_to "Destroy", reckoning_item_path(reckoning, item), :method => :delete, :data => { :confirm => "Are you sure?" }
-
-%br
-
-= link_to "New Item", new_reckoning_item_path(reckoning)
-= link_to "Back", reckoning_path(reckoning)
+= link_to "Back to reckoning", reckoning_path(reckoning)

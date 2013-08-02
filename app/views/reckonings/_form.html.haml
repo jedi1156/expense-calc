@@ -5,8 +5,9 @@
 		= f.input :name
 		= f.input :description, as: :text
 
-		%h4 You may invite some of your friends:
-		= f.association :invitations, collection: new_invitations, as: :check_boxes, include_blank: false
+		- unless new_invitations.empty?
+			%h4 You may invite some of your friends:
+			= f.association :invitations, collection: new_invitations, as: :check_boxes, include_blank: false
 
 	.form-actions
 		= f.button :submit
