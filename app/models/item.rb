@@ -23,4 +23,8 @@ class Item
   def expense_of(user_reckoning)
     expenses.detect { |ex| ex.user_reckoning == user_reckoning } || Expense.new(user_reckoning: user_reckoning)
   end
+
+  def new_user_reckonings
+    reckoning.user_reckonings - expenses.map { |ex| ex.user_reckoning }
+  end
 end

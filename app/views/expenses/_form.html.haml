@@ -8,7 +8,7 @@
 			= expense.user_name
 		= f.input :paid, input_html: { value: expense.money_paid, class: "expense--paid" }
 		= f.input :used, input_html: { value: expense.money_used, class: "expense--used" }
-		= link_to "Rest", rest_item_expense_path(item), { class: "expense--rest" }
+		= link_to "Rest", rest_item_expense_path(item, expense_id: expense.id), { class: "expense--rest" }
 
 	.form-actions
 		= f.button :submit
