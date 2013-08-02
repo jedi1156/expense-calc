@@ -1,14 +1,22 @@
-%p#notice= notice
-
+%h3= item
+%h4
+	= "Item in reckoning: "
+	= link_to reckoning, reckoning
 %p
-	%b Name:
-	= item.name
-%p
-	%b Bought at:
+	%b= "Bought at: "
 	= item.bought_at
 %p
-	%b Cost:
+	%b= "Cost: "
 	= item.money_cost
+%p
+	%b= "You paid: "
+	= item.money_paid_by(current_user_reckoning)
+%p
+	%b= "You used: "
+	= item.money_used_by(current_user_reckoning)
+%p{ class: ("item--warning" unless item.positive_balance_of?(current_user_reckoning)) }
+	%b= "Balance: "
+	= item.balance_of(current_user_reckoning)
 - unless item.cost_valid?
 	%p.item--warning
 		= "This item is invalid and won't be counted in the reckoning"
@@ -16,10 +24,11 @@
 		%b Used:
 		= item.money_used
 
-= link_to 'Edit', edit_reckoning_item_path(reckoning, item)
+= link_to "Edit", edit_reckoning_item_path(reckoning, item)
 \|
-= link_to "Expenses", item_expenses_path(item)
+= link_to "Destroy", reckoning_item_path(reckoning, item), :method => :delete, :data => { :confirm => "Are you sure?" }
 \|
-= link_to 'Back', reckoning_items_path(reckoning)
+= link_to "Back", reckoning_items_path(reckoning)
 
+%h4= link_to "Expenses", item_expenses_path(item)
 = render "expenses/expenses", expenses: expenses

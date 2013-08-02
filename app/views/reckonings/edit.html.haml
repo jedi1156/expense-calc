@@ -2,6 +2,8 @@
 
 = render 'form'
 
-= link_to 'Show', reckoning
+= link_to 'Show this reckoning', reckoning
+\|
+= link_to "Destroy", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }
 \|
 = link_to 'Back', reckonings_path

@@ -40,4 +40,24 @@ class Reckoning
 			end
 		end
 	end
+
+	def total_paid_by(user_reckoning)
+		items.inject(0) do |mem, it|
+			if it.cost_valid?
+				mem + it.expense_of(user_reckoning).paid
+			else
+				mem
+			end
+		end
+	end
+
+	def total_balance_of(user_reckoning)
+		items.inject(0) do |mem, it|
+			if it.cost_valid?
+				mem + it.expense_of(user_reckoning).value
+			else
+				mem
+			end
+		end
+	end
 end

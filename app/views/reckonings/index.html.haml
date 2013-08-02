@@ -10,14 +10,12 @@
       %th Admin
       %th
       %th
-      %th
 
     - your_reckonings.each do |reckoning|
       %tr
-        %td= reckoning.name
+        %td= link_to reckoning, reckoning
         %td= reckoning.created_at
         %td= reckoning.admin
-        %td= link_to "Show", reckoning
         %td= link_to "Edit", edit_reckoning_path(reckoning)
         %td= link_to "Destroy", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }
 

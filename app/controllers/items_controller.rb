@@ -4,6 +4,7 @@ class ItemsController < ApplicationController
   expose_decorated(:items) { reckoning.items }
   expose_decorated(:expenses) { item.expenses }
   expose_decorated(:new_user_reckonings, decorator: UserReckoningDecorator) { item.new_user_reckonings }
+  expose(:current_user_reckoning) { current_user.find_user_reckoning(reckoning.id) }
 
   def index
   end

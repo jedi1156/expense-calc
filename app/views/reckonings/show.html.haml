@@ -1,7 +1,7 @@
 %p#notice= notice
 
 .reckoning
-	%h2= reckoning.name
+	%h2= link_to reckoning, reckoning
 	%p
 		%b Created at:
 		= l reckoning.created_at
@@ -9,6 +9,8 @@
 		= reckoning.description
 
 	= link_to "Edit", edit_reckoning_path(reckoning)
+	\|
+	= link_to "Destroy", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }
 	\|
 	= link_to "Report", reckoning_report_path(reckoning)
 	\|

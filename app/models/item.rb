@@ -3,7 +3,7 @@ class Item
   include MoneyRoutines
   field :name, type: String
   field :description, type: String
-  field :bought_at, type: Time
+  field :bought_at, type: Time, default: Time.now
 
   belongs_to :reckoning
   has_many :expenses, dependent: :destroy
