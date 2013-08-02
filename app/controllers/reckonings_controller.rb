@@ -1,5 +1,5 @@
 class ReckoningsController < ApplicationController
-  expose(:reckoning, attributes: :reckoning_params)
+  expose_decorated(:reckoning, attributes: :reckoning_params)
   expose(:your_reckonings) { current_user.user_reckonings.map { |r| r.reckoning } }
   expose(:users_in_reckoning) { reckoning.user_reckonings.map { |ur| ur.user } }
   expose(:new_invitations) { current_user.friends - reckoning.users }

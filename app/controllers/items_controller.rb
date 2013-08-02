@@ -1,5 +1,5 @@
 class ItemsController < ApplicationController
-  expose(:reckoning)
+  expose_decorated(:reckoning)
   expose_decorated(:item)
   expose_decorated(:items) { reckoning.items }
 

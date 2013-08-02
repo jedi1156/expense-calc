@@ -2,13 +2,13 @@ class ReckoningDecorator < Draper::Decorator
 	delegate_all
 	decorate :reckoning
 
-  # Define presentation-specific methods here. Helpers are accessed through
-  # `helpers` (aka `h`). You can override attributes, for example:
-  #
-  #   def created_at
-  #     helpers.content_tag :span, class: 'time' do
-  #       object.created_at.strftime("%a %m/%d/%y")
-  #     end
-  #   end
+  include MoneyRoutines
 
+  def total_money_cost
+    to_dolars(total_cost)
+  end
+
+  def total_money_usage_by(user_reckoning)
+    to_dolars(total_usage_by(user_reckoning))
+  end
 end
