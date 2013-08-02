@@ -1,10 +1,14 @@
 = simple_form_for(reckoning) do |f|
-  = f.error_notification
+	= f.error_notification
 
-  .form-inputs
-    = f.input :name
-    = f.input :created_at
-    = f.input :report_valid
+	.form-inputs
+		= f.input :name
+		= f.input :description, as: :text
 
-  .form-actions
-    = f.button :submit
+		%h4 You may invite some of your friends:
+		= f.association :invitations, collection: new_invitations, as: :check_boxes, include_blank: false
+
+	.form-actions
+		= f.button :submit
+
+

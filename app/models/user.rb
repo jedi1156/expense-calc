@@ -34,8 +34,7 @@ class User
   attr_accessible :name, :provider, :uid, :email, :password, :password_confirmation, :remember_me, :created_at, :updated_at
 
   has_many :user_reckonings, dependent: :destroy
-  has_many :invitations_for, class_name: "Invitation", inverse_of: :from_user, dependent: :destroy
-  has_many :invitations_from, class_name: "Invitation", inverse_of: :for_user, dependent: :destroy
+  has_and_belongs_to_many :invitations, class_name: "Reckoning", inverse_of: :invitations
 
   has_and_belongs_to_many :friends, class_name: "User"
   has_many :friend_requests_to, class_name: "FriendRequest", inverse_of: :from_user

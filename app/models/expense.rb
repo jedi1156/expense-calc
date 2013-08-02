@@ -1,5 +1,6 @@
 class Expense
 	include Mongoid::Document
+	include MoneyRoutines
 
 	field :paid, type: Integer
 	field :used, type: Integer
@@ -15,5 +16,10 @@ class Expense
 
 	def user
 		user_reckoning.user
+	end
+
+	def set_values(expense)
+		self.paid = to_cents(expense[:paid])
+		self.used = to_cents(expense[:used])
 	end
 end

@@ -1,23 +1,46 @@
-%h1 Listing reckonings
-
-%table
-  %tr
-    %th Name
-    %th Created at
-    %th Report valid
-    %th
-    %th
-    %th
-
-  - user_reckonings.each do |reckoning|
+%h4 Reckonings
+ 
+- if your_reckonings.empty?
+  %p Currently you are not participating in any reckonings.
+- else
+  %table
     %tr
-      %td= reckoning.name
-      %td= reckoning.created_at
-      %td= reckoning.report_valid
-      %td= link_to 'Show', reckoning
-      %td= link_to 'Edit', edit_reckoning_path(reckoning)
-      %td= link_to 'Destroy', reckoning, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %th Name
+      %th Created at
+      %th Admin
+      %th
+      %th
+      %th
+
+    - your_reckonings.each do |reckoning|
+      %tr
+        %td= reckoning.name
+        %td= reckoning.created_at
+        %td= reckoning.admin
+        %td= link_to "Show", reckoning
+        %td= link_to "Edit", edit_reckoning_path(reckoning)
+        %td= link_to "Destroy", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }
 
 %br
 
-= link_to 'New Reckoning', new_reckoning_path
+- if current_user.invitations.empty?
+  %p You have no invitations.
+- else
+  %h4 You are invited to following reckonings
+  %table
+    %tr
+      %th Name
+      %th Created at
+      %th Admin
+      %th
+
+    - current_user.invitations.each do |inv|
+      %tr
+        %td= inv.name
+        %td= inv.created_at
+        %td= inv.admin
+        %td= link_to "Accept", reckoning_user_reckonings_path(inv), method: :post
+
+%br
+
+= link_to "New Reckoning", new_reckoning_path

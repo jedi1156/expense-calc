@@ -1,17 +1,25 @@
 %p#notice= notice
 
-%p
-  %b Name:
-  = reckoning.name
-%p
-  %b Created at:
-  = reckoning.created_at
-%p
-  %b Report valid:
-  = reckoning.report_valid
+.reckoning
+	%p
+		%b Name:
+		= reckoning.name
+	%p
+		%b Created at:
+		= reckoning.created_at
+	%p
+		%b Report valid:
+		= reckoning.report_valid
 
-= link_to "Edit", edit_reckoning_path(reckoning)
-\|
-= link_to "Items", reckoning_items_path(reckoning)
-\|
-= link_to "Back", reckonings_path
+	= link_to "Edit", edit_reckoning_path(reckoning)
+	\|
+	= link_to "Items", reckoning_items_path(reckoning)
+	\|
+	= link_to "Back", reckonings_path
+.user--list
+	%h4 Users in this reckoning
+	%ul
+		- users_in_reckoning.each do |u|
+			%li
+				= u
+	= link_to "Invite friends", edit_reckoning_path(reckoning)

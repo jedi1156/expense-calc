@@ -1,8 +1,8 @@
 class ExpensesController < ApplicationController
 	expose_decorated(:item)
 	expose_decorated(:reckoning) { item.reckoning }
-	expose_decorated(:user_reckonings) { reckoning.user_reckonings }
-	expose(:item_expenses) { item.expenses }
+	expose_decorated(:item_expenses, decorator: ExpenseDecorator) { item.expenses }
+	expose_decorated(:new_user_reckonings, decorator: UserReckoningDecorator) { reckoning.user_reckonings - item.expenses.map { |ex| ex.user_reckoning }}
 	expose_decorated(:expense)
 
 	def index
@@ -12,12 +12,16 @@ class ExpensesController < ApplicationController
 	end
 
 	def new
+		if new_user_reckonings.empty?
+			redirect_to action: :index
+		end
 	end
 
 	def edit
 	end
 
 	def create
+		expense.set_values(params[:expense])
 		if expense.empty?
 			redirect_to item_expenses_path(item)
 		else
@@ -31,6 +35,7 @@ class ExpensesController < ApplicationController
 	end
 
 	def update
+		expense.set_values(params[:expense])
 		if expense.empty?
 			expense.destroy
 			redirect_to item_expenses_path(item)
@@ -44,5 +49,15 @@ class ExpensesController < ApplicationController
 	def destroy
 		flash[:error] = "Cannot remove that" unless expense.destroy
 		redirect_to action: :index
+	end
+
+	def rest
+		if paid = params[:paid]
+			paid = to_cents(paid.to_f)
+		else
+			paid = expense.paid
+		end
+		the_rest = (item.cost - expense.paid + paid) - (item.used - expense.used)
+		render json: to_dolars(the_rest)
 	end
 end

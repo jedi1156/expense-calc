@@ -1,6 +1,7 @@
 source "https://rubygems.org"
 
 gem "rails"
+gem "strong_parameters"
 gem "jquery-rails"
 gem "mongoid"
 gem "haml-rails"

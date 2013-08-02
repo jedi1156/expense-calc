@@ -4,7 +4,7 @@
 	= f.error_notification
 
 	.form-inputs
-		= f.association :user_reckoning, collection: user_reckonings, label_method: :user_name, value_method: :id
+		= f.association :user_reckoning, collection: new_user_reckonings, label_method: :user_name, value_method: :id, selected: new_user_reckonings.first
 		= f.input :paid
 		= f.input :used
 

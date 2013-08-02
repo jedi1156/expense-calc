@@ -1,11 +1,20 @@
 %p#notice= notice
 
 %p
-  %b Name:
-  = item.name
+	%b Name:
+	= item.name
 %p
-  %b Bought at:
-  = item.bought_at
+	%b Bought at:
+	= item.bought_at
+%p
+	%b Cost:
+	= item.money_cost
+- unless item.cost_valid?
+	%p.item--warning
+		= "This item is invalid and won't be counted in the reckoning"
+		%br
+		%b Used:
+		= item.money_used
 
 = link_to 'Edit', edit_reckoning_item_path(reckoning, item)
 \|
