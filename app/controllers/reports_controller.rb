@@ -3,6 +3,8 @@ class ReportsController < ApplicationController
 	expose(:items) { reckoning.items.find_all { |it| it.cost_valid? } }
 	expose_decorated(:flows) { reckoning.flows }
 
+	authorize_resource :reckoning, decent_exposure: true
+
 	def create
 		reck_id = params[:reckoning_id]
 		if reck_id && reck = Reckoning.find(reck_id)

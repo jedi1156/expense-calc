@@ -6,6 +6,8 @@ class ItemsController < ApplicationController
   expose_decorated(:new_user_reckonings, decorator: UserReckoningDecorator) { item.new_user_reckonings }
   expose(:current_user_reckoning) { current_user.find_user_reckoning(reckoning.id) }
 
+  authorize_resource :reckoning, decent_exposure: true
+
   def index
   end
 

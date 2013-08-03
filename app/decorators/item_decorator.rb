@@ -33,4 +33,8 @@ class ItemDecorator < Draper::Decorator
   def multiline_description
     description.to_s.gsub(/\n/, "<br>").html_safe
   end
+
+  def date_of_purchase
+    bought_at ? (l bought_at) : ""
+  end
 end

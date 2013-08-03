@@ -1,4 +1,6 @@
-%h4 Reckonings
+%h4
+  = "Reckonings"
+  %small= "(#{your_reckonings.length})"
  
 - if your_reckonings.empty?
   %p Currently you are not participating in any reckonings.
@@ -7,6 +9,7 @@
     %tr
       %th Name
       %th Created at
+      %th Users
       %th Admin
       %th
       %th
@@ -14,29 +17,35 @@
     - your_reckonings.each do |reckoning|
       %tr
         %td= link_to reckoning, reckoning
-        %td= l reckoning.created_at
+        %td= reckoning.date_of_creation
+        %td= reckoning.user_reckonings.length
         %td= reckoning.admin
-        %td= link_to "Edit", edit_reckoning_path(reckoning), class: "btn--edit"
-        %td= link_to "Remove", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
+        - if can? :manage, reckoning
+          %td= link_to "Edit", edit_reckoning_path(reckoning), class: "btn--edit"
+          %td= link_to "Remove", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
 
 %br
 
-- if current_user.invitations.empty?
+- if invitations.empty?
   %p You have no invitations.
 - else
-  %h4 You are invited to following reckonings
+  %h4
+    = "You are invited to following reckonings"
+    %small= "(#{invitations.length})"
   %table
     %tr
       %th Name
       %th Created at
+      %th Users
       %th Admin
       %th
       %th
 
-    - current_user.invitations.each do |inv|
+    - invitations.each do |inv|
       %tr
         %td= inv.name
-        %td= l inv.created_at
+        %td= inv.date_of_creation
+        %td= inv.user_reckonings.length
         %td= inv.admin
         %td= link_to "Accept", reckoning_user_reckonings_path(inv), method: :post, class: "btn--create"
         %td= link_to "Refuse", reckoning_invitation_path(inv, current_user), method: :delete, class: "btn--destroy", data: { confirm: "Are you sure?" }

@@ -15,6 +15,7 @@ ExpenseCalc::Application.routes.draw do
 		resource :report, only: [ :create, :show ]
 		resources :invitations, only: [ :destroy ]
 	end
+	post "/reckoning/:reckoning_id/user_reckonings/:id/make_admin", to: "user_reckonings#make_admin", as: :make_admin_reckoning_user_reckoning
 
 	resources :items do
 		resources :expenses

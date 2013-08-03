@@ -3,10 +3,12 @@ class FriendRequestsController < ApplicationController
 	expose(:requests_to) { current_user.friend_requests_to }
 	expose(:requests_from) { current_user.friend_requests_from }
 
+	authorize_resource decent_exposure: true, only: [ :destroy ]
+
 	def create
 		friend_request.from_user = current_user
-		friend_request.to_user = User.find(params[:friend_id])
-		if friend_request.save
+		friend_request.to_user = User.find_or_initialize_by(id: params[:friend_id])
+		if !friend_request.to_user.new_record? && friend_request.save
 			flash[:notice] = "Sent friend request to #{friend_request.to_user.to_s}"
 		else
 			flash[:error] = "Error, couldn't send that request"

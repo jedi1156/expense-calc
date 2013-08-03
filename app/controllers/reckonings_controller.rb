@@ -1,11 +1,15 @@
 class ReckoningsController < ApplicationController
   expose_decorated(:reckoning, attributes: :reckoning_params)
   expose_decorated(:your_reckonings, decorator: ReckoningDecorator) { current_user.user_reckonings.map { |r| r.reckoning } }
+  expose_decorated(:invitations, decorator: ReckoningDecorator) { current_user.invitations }
+
   expose(:users_in_reckoning) { reckoning.user_reckonings.map { |ur| ur.user } }
   expose(:new_invitations) { current_user.friends - reckoning.users }
   expose_decorated(:items) { reckoning.items.sort_by { |it| it.bought_at || Time.now } }
   expose(:current_user_reckoning) { current_user.find_user_reckoning(reckoning.id) }
   
+  authorize_resource decent_exposure: true
+
   def index
   end
 

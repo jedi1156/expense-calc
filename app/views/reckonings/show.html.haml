@@ -1,17 +1,16 @@
-%p#notice= notice
-
 .reckoning
 	%h2= link_to reckoning, reckoning
 	%p
 		%b Created at:
-		= l reckoning.created_at
+		= reckoning.date_of_creation
 	%p
 		= reckoning.multiline_description
 
 	.form-actions
 		= link_to "Settle-up report", reckoning_report_path(reckoning), method: :post, class: "btn--info"
-		= link_to "Edit", edit_reckoning_path(reckoning), class: "btn--edit"
-		= link_to "Remove", reckoning, method: :delete, data: { confirm: "Are you sure?" }, class: "btn--destroy"
+		- if can? :manage, reckoning
+			= link_to "Edit", edit_reckoning_path(reckoning), class: "btn--edit"
+			= link_to "Remove", reckoning, method: :delete, data: { confirm: "Are you sure?" }, class: "btn--destroy"
 .user--list
 	%h4 Users in this reckoning
 	%table
@@ -19,20 +18,32 @@
 			%tr
 				%td= u
 				%td
-					= link_to reckoning_user_reckoning_path(reckoning, u.find_user_reckoning(reckoning.id)), method: :delete, data: { confirm: "Are you sure?" }, class: "btn--destroy" do
-						- if u == current_user
-							= "I'm out!"
+					- if (f = !(reckoning.admins.include? u))
+						- if (can? :manage, reckoning)
+							= link_to "Make admin", make_admin_reckoning_user_reckoning_path(reckoning, u.find_user_reckoning(reckoning.id)), method: :post, data: { confirm: "Are you sure? Once given rights cannot be taken back!" }, class: "btn--warning"
 						- else
-							= "Kick"
+							= "Regular user"
+					- else
+						= "Admin"
+				%td
+					- if (fc = current_user == u) || f
+						= link_to reckoning_user_reckoning_path(reckoning, u.find_user_reckoning(reckoning.id)), method: :delete, data: { confirm: "Are you sure?" }, class: "btn--destroy" do
+							- if u == current_user
+								= "I'm out!"
+							- else
+								= "Kick"
 
-	- unless reckoning.invitations.empty?
-		%h4 Invited
-		%table
-			- reckoning.invitations.each do |u|
-				%tr
-					%td= u
-					%td= link_to "Cancel", reckoning_invitation_path(reckoning, u), method: :delete, data: { confirm: "Are you sure?" }, class: "btn--destroy"
-	= link_to "Invite friends", edit_reckoning_path(reckoning), class: "btn--edit"
+	- if can? :manage, reckoning
+		- unless reckoning.invitations.empty?
+			%h4 Invited
+			%table
+				- reckoning.invitations.each do |u|
+					%tr
+						%td= u
+						%td= link_to "Cancel", reckoning_invitation_path(reckoning, u), method: :delete, data: { confirm: "Are you sure?" }, class: "btn--destroy"
+		= link_to "Invite friends", edit_reckoning_path(reckoning), class: "btn--edit"
 .item--list
-	%h4= link_to "Items bought", reckoning_items_path(reckoning)
+	%h4
+		= link_to "Items bought", reckoning_items_path(reckoning)
+		%small= "(#{items.length})"
 	= render "items/items", items: items

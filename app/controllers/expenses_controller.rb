@@ -5,6 +5,8 @@ class ExpensesController < ApplicationController
 	expose_decorated(:new_user_reckonings, decorator: UserReckoningDecorator) { item.new_user_reckonings }
 	expose_decorated(:expense, attributes: :expense_params)
 
+	authorize_resource :reckoning, decent_exposure: true
+
 	def index
 	end
 

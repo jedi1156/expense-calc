@@ -18,10 +18,9 @@ class Reckoning
 		user_reckonings.map { |ur| ur.user }
 	end
 
-	def admin
-		if ur = user_reckonings.detect { |ur| ur.admin_rights }
-			ur.user
-		end
+	def admins
+		adm = user_reckonings.map { |ur| ur.user if ur.admin_rights }
+		adm.reject { |u| !u }
 	end
 
 	def total_cost

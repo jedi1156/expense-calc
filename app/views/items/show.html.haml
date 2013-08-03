@@ -4,12 +4,19 @@
 	= link_to reckoning, reckoning
 .span6.pull-left
 	%p= item.multiline_description
+	.form-actions
+		= link_to "Edit", edit_reckoning_item_path(reckoning, item), class: "btn--edit"
+		= link_to "Remove", reckoning_item_path(reckoning, item), :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
+		= link_to "Back", reckoning_items_path(reckoning), class: "btn--back"
+
+	%h4= link_to "Expenses", item_expenses_path(item)
+	= render "expenses/expenses", expenses: expenses
 .span4.pull-right
 	
 	%table
 		%tr
 			%th= "Bought at: "
-			%td= l item.bought_at
+			%td= item.date_of_purchase
 		%tr{ class: ("item--warning" unless item.cost_valid?) }
 			%th= "Cost: "
 			%td= item.money_cost
@@ -35,10 +42,3 @@
 				%br
 				%b= "Tip: "
 				= "Try using 'Rest' button while editing expenses to calculate the remaining usage."
-.footer
-	= link_to "Edit", edit_reckoning_item_path(reckoning, item), class: "btn--edit"
-	= link_to "Remove", reckoning_item_path(reckoning, item), :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
-	= link_to "Back", reckoning_items_path(reckoning), class: "btn--back"
-
-	%h4= link_to "Expenses", item_expenses_path(item)
-	= render "expenses/expenses", expenses: expenses

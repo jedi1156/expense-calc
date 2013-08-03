@@ -4,6 +4,10 @@ class ReckoningDecorator < Draper::Decorator
 
 	include MoneyRoutines
 
+	def admin
+		admins.first
+	end
+
 	def total_money_cost
 		to_dolars(total_cost)
 	end
@@ -31,4 +35,8 @@ class ReckoningDecorator < Draper::Decorator
     def multiline_description
         description.gsub(/\n/, "<br>").html_safe
     end
+
+	def date_of_creation
+		created_at ? (l created_at) : ""
+	end
 end

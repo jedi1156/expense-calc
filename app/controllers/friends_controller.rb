@@ -1,8 +1,10 @@
 class FriendsController < ApplicationController
-	expose(:friend_request) { FriendRequest.find(params[:friend_request_id]) }
+	expose(:friend_request) { FriendRequest.find_or_initalize_by(id: params[:friend_request_id]) }
 	expose(:friend) { current_user.friends.detect { |f| f.id.to_s == params[:id] } }
 	expose(:requested_friend) { friend_request.friend(current_user) }
 	expose(:user_friends) { current_user.friends }
+
+	authorize_resource :friend_request, decent_exposure: true, only: [ :create ]
 
 	def create
 		if requested_friend
