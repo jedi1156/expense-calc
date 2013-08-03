@@ -26,3 +26,40 @@ body {
     margin-left: 30px
   }
 }
+
+.datetime {
+  max-width: 100px;
+  display: inline;
+}
+
+/*
+ * buttons
+ */
+.btn--create, .btn--edit, .btn--destroy, .btn--back, .btn--info {
+  @extend .btn;
+}
+
+.btn--create {
+  @extend .btn-success;
+}
+
+.btn--edit {
+  @extend .btn-primary;
+}
+
+.btn--destroy {
+  @extend .btn-danger;
+}
+
+.btn--back {
+  @extend .btn-inverse;
+}
+
+.btn--info {
+  @extend .btn-info;
+}
+
+table {
+  @extend .table;
+  @extend .table-striped;
+}

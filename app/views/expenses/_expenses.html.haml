@@ -11,10 +11,13 @@
       %td= expense.user_reckoning.user
       %td= expense.money_paid
       %td= expense.money_used
-      %td= link_to "Edit", edit_item_expense_path(item, expense)
-      %td= link_to "Destroy", item_expense_path(item, expense), :method => :delete, :data => { :confirm => "Are you sure?" }
+      %td
+        = link_to "Edit", edit_item_expense_path(item, expense), class: "btn--edit"
+        = link_to "Remove", item_expense_path(item, expense), :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
 
 %br
 
 - unless new_user_reckonings.empty?
-  = link_to "New Expense", new_item_expense_path(item)
+  = link_to new_item_expense_path(item), class: "btn--create" do
+    %i{ class: "icon-plus icon-white" }
+    %span= "Add expense"

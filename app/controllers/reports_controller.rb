@@ -1,5 +1,5 @@
 class ReportsController < ApplicationController
-	expose(:reckoning)
+	expose_decorated(:reckoning)
 	expose(:items) { reckoning.items.find_all { |it| it.cost_valid? } }
 	expose_decorated(:flows) { reckoning.flows }
 

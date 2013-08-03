@@ -1,9 +1,7 @@
 %h1 Editing item
 
-= render 'form'
+= render "form"
 
-= link_to 'Show this item', reckoning_item_path(reckoning, item)
-\|
-= link_to "Destroy", reckoning_item_path(reckoning, item), :method => :delete, :data => { :confirm => "Are you sure?" }
-\|
-= link_to 'Back', reckoning_items_path(reckoning)
+= link_to "Show this item", reckoning_item_path(reckoning, item), class: "btn--info"
+= link_to "Remove", reckoning_item_path(reckoning, item), :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
+= link_to "Back", reckoning_items_path(reckoning), class: "btn--back"

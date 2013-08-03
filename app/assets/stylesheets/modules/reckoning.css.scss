@@ -2,3 +2,13 @@
 	float: left;
 	margin: auto auto 50px auto
 }
+
+.reckoning--form-inputs {
+	@extend .form-inputs;
+	float: left;
+}
+
+.reckoning--form-actions {
+	@extend .form-actions;
+	clear: both;
+}

@@ -7,7 +7,7 @@
 		%th Valid
 		%th You paid
 		%th You used
-		%th Balance
+		%th Your balance
 		%th
 		%th
 
@@ -17,7 +17,8 @@
 		- valid = item.cost_valid?
 		%tr
 			%td{ class: ("item--warning" unless valid) }= (i += 1)
-			%td= link_to item, reckoning_item_path(reckoning, item)
+			%td
+				%big= link_to item, reckoning_item_path(reckoning, item)
 			%td= item.bought_at ? (l item.bought_at) : ""
 			%td= item.money_cost
 			- if valid
@@ -28,17 +29,17 @@
 			%td= item.money_used_by(current_user_reckoning)
 			%td{ class: ("item--warning" unless item.positive_balance_of?(current_user_reckoning)) }
 				= item.balance_of(current_user_reckoning)
-			%td= link_to "Edit", edit_reckoning_item_path(reckoning, item)
-			%td= link_to "Destroy", reckoning_item_path(reckoning, item), :method => :delete, :data => { :confirm => "Are you sure?" }
+			%td= link_to "Edit", edit_reckoning_item_path(reckoning, item), class: "btn--edit"
+			%td= link_to "Remove", reckoning_item_path(reckoning, item), :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
 	%tr
 		%th Total
 		%th
 		%th
 		%th Cost
 		%th
-		%th Money paid
-		%th Money used
-		%th Balance
+		%th Money you paid
+		%th Money you used
+		%th Your balance
 	%tr
 		%td
 		%td
@@ -54,4 +55,6 @@
 
 %br
 
-= link_to "New Item", new_reckoning_item_path(reckoning)
+= link_to new_reckoning_item_path(reckoning), class: "btn--create" do
+	%i{ class: "icon-plus icon-white" }
+	%span= "New Item"

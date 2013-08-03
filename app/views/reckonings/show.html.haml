@@ -8,20 +8,23 @@
 	%p
 		= reckoning.description
 
-	= link_to "Edit", edit_reckoning_path(reckoning)
-	\|
-	= link_to "Destroy", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }
-	\|
-	= link_to "Report", reckoning_report_path(reckoning)
-	\|
-	= link_to "Back", reckonings_path
+	.form-actions
+		= link_to "Settle-up report", reckoning_report_path(reckoning), method: :post, class: "btn--info"
+		= link_to "Edit", edit_reckoning_path(reckoning), class: "btn--edit"
+		= link_to "Remove", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
 .user--list
 	%h4 Users in this reckoning
-	%ul
+	%table
 		- users_in_reckoning.each do |u|
-			%li
-				= u
-	= link_to "Invite friends", edit_reckoning_path(reckoning)
+			%tr
+				%td= u
+	- unless reckoning.invitations.empty?
+		%h4 Invited
+		%table
+			- reckoning.invitations.each do |u|
+				%tr
+					%td= u
+	= link_to "Invite friends", edit_reckoning_path(reckoning), class: "btn--edit"
 .item--list
 	%h4= link_to "Items bought", reckoning_items_path(reckoning)
 	= render "items/items", items: items

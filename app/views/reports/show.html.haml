@@ -1,16 +1,19 @@
-%h3 Report
+%h3
+	= "Settle-up report for "
+	= link_to reckoning, reckoning
 - if reckoning.report_generated_at
 	%p 
 		Generated at: 
 		= l reckoning.report_generated_at
-= link_to "Reload", reckoning_report_path(reckoning), method: :post
-= link_to "Back to reckoning", reckoning_path(reckoning)
+.form-actions
+	= link_to "Generate", reckoning_report_path(reckoning), method: :post, class: "btn--info"
+	= link_to "Back to reckoning", reckoning_path(reckoning), class: "btn--back"
 
 %table
 	%tr
-		%th From user
-		%th To user
-		%th Value
+		%th This user...
+		%th ...should pay this user...
+		%th ...that much
 	- flows.each do |fl|
 		%tr
 			%td= fl.from

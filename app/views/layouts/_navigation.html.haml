@@ -1,18 +1,25 @@
-.navigation
-  %ul.nav
-    %li
-      = link_to "expense-calc", root_path
-    - if user_signed_in?
-      %li
-        = link_to "Users", users_path
-      %li{class: is?("devise/registrations")}
-        = link_to "Edit account", edit_user_registration_path
-      %li
-        = link_to "Friends", friends_path
-      %li
-        = link_to "Reckonings", reckonings_path
-      %li.logout-button
-        = link_to "Logout", destroy_user_session_path, method: "delete", class: "pull-right"
-    - else
-      %li.login-button
-        = link_to "Login", new_user_session_path
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+      %ul.nav
+        %li
+          = link_to "expense-calc", root_path, class: "navbar-brand"
+        - if user_signed_in?
+          %li
+            = link_to "Users", users_path
+          %li{ class: is?("devise/registrations") }
+            = link_to "Edit account", edit_user_registration_path
+          %li
+            = link_to "Friends", friends_path
+          - unless current_user.friend_requests_from.empty?
+            %li.badge= current_user.friend_requests_from.length
+          %li
+            = link_to "Reckonings", reckonings_path
+          - unless current_user.invitations.empty?
+            %li.badge= current_user.invitations.length
+          %li.logout-button
+            = link_to "Logout", destroy_user_session_path, method: "delete"
+        - else
+          %li.login-button
+            = link_to "Login", new_user_session_path
+

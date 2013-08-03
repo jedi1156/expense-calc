@@ -2,4 +2,4 @@
 
 = render "form"
 
-= link_to "Destroy", item_expense_path(item, expense), :method => :delete, :data => { :confirm => "Are you sure?" }
+= link_to "Remove", item_expense_path(item, expense), :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"

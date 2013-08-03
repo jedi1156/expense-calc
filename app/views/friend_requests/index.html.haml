@@ -4,19 +4,20 @@
 	- unless requests_from.empty?
 		%h3
 			Following users have sent you friend requests:
-		%ul
+		%table
 			- requests_from.each do |fr|
-				%li
-					= fr.from_user.to_s
-					= link_to "Accept", friends_path(friend_request_id: fr.id), method: :post
-					= link_to "Refuse", friend_request_path(fr), method: :delete, data: { confirm: "You'll end up alone this way, are you sure?" }
+				%tr
+					%td= fr.from_user.to_s
+					%td
+						= link_to "Accept", friends_path(friend_request_id: fr.id), method: :post, class: "btn--create"
+						= link_to "Refuse", friend_request_path(fr), method: :delete, data: { confirm: "You'll end up alone this way, are you sure?" }, class: "btn--destroy"
 
 	- unless requests_to.empty?
 		%h3
 			You have sent friend requests to:
-		%ul
+		%table
 			- requests_to.each do |fr|
-				%li
-					= fr.to_user.to_s
-					= link_to "Resign", friend_request_path(fr), method: :delete, data: { confirm: "Are you sure you don't want to wait any more?" }
+				%tr
+					%td= fr.to_user.to_s
+					%td= link_to "Resign", friend_request_path(fr), method: :delete, data: { confirm: "Are you sure you don't want to wait any more?" }, class: "btn--destroy"
 		%p Still waiting...

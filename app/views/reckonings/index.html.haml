@@ -16,8 +16,8 @@
         %td= link_to reckoning, reckoning
         %td= reckoning.created_at
         %td= reckoning.admin
-        %td= link_to "Edit", edit_reckoning_path(reckoning)
-        %td= link_to "Destroy", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }
+        %td= link_to "Edit", edit_reckoning_path(reckoning), class: "btn--edit"
+        %td= link_to "Remove", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
 
 %br
 
@@ -31,14 +31,18 @@
       %th Created at
       %th Admin
       %th
+      %th
 
     - current_user.invitations.each do |inv|
       %tr
         %td= inv.name
         %td= inv.created_at
         %td= inv.admin
-        %td= link_to "Accept", reckoning_user_reckonings_path(inv), method: :post
+        %td= link_to "Accept", reckoning_user_reckonings_path(inv), method: :post, class: "btn--create"
+        %td= link_to "Refuse", "", method: :delete, class: "btn--destroy"
 
 %br
 
-= link_to "New Reckoning", new_reckoning_path
+= link_to new_reckoning_path, class: "btn--create" do
+  %i{ class: "icon-plus icon-white" }
+  %span= "New Reckoning"
