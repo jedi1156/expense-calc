@@ -1,6 +1,6 @@
 class ItemsController < ApplicationController
   expose_decorated(:reckoning)
-  expose_decorated(:item)
+  expose_decorated(:item, attributes: :item_params)
   expose_decorated(:sorted_items, decorator: ItemDecorator) { reckoning.items.sort_by { |it| it.bought_at || Time.now } }
   expose_decorated(:expenses) { item.expenses }
   expose_decorated(:new_user_reckonings, decorator: UserReckoningDecorator) { item.new_user_reckonings }
@@ -38,5 +38,13 @@ class ItemsController < ApplicationController
   def destroy
     flash[:error] = "Cannot remove that" unless item.destroy
     redirect_to action: :index
+  end
+private
+  def item_params
+    raw = params.require(:item)
+    bought_at = (1..5).to_a.map { |i| raw.fetch("bought_at(#{i}i)") }
+    par = raw.permit(:name, :description)
+    par[:bought_at] = Time.new(*bought_at)
+    par
   end
 end
