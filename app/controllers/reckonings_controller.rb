@@ -44,6 +44,6 @@ class ReckoningsController < ApplicationController
 
 private
   def reckoning_params
-    params.require(:reckoning).permit(:name, :description, :invitation_ids)
+    params.require(:reckoning).permit(:name, :description, invitation_ids: [])
   end
 end

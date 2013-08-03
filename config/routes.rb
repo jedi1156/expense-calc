@@ -10,14 +10,15 @@ ExpenseCalc::Application.routes.draw do
 	resources :friend_requests, only: [ :create, :destroy, :index ]
 
 	resources :reckonings do
-		resources :user_reckonings
+		resources :user_reckonings, only: [ :create, :destroy ]
 		resources :items
 		resource :report, only: [ :create, :show ]
+		resources :invitations, only: [ :destroy ]
 	end
 
 	resources :items do
 		resources :expenses
 	end
-
 	get "/item/:item_id/expenses/rest", to: "expenses#rest", as: :rest_item_expense
+
 end

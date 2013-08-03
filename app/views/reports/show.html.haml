@@ -6,16 +6,19 @@
 		Generated at: 
 		= l reckoning.report_generated_at
 .form-actions
-	= link_to "Generate", reckoning_report_path(reckoning), method: :post, class: "btn--info"
+	= link_to "Reload", reckoning_report_path(reckoning), method: :post, class: "btn--info"
 	= link_to "Back to reckoning", reckoning_path(reckoning), class: "btn--back"
 
-%table
-	%tr
-		%th This user...
-		%th ...should pay this user...
-		%th ...that much
-	- flows.each do |fl|
+- if flows.empty?
+	%h4= "No transfers needed"
+- else
+	%table
 		%tr
-			%td= fl.from
-			%td= fl.to
-			%td= fl.money_value
+			%th This user...
+			%th ...should pay this user...
+			%th ...that much
+		- flows.each do |fl|
+			%tr
+				%td= fl.from
+				%td= fl.to
+				%td= fl.money_value

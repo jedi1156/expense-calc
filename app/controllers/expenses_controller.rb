@@ -3,7 +3,7 @@ class ExpensesController < ApplicationController
 	expose_decorated(:reckoning) { item.reckoning }
 	expose_decorated(:expenses, decorator: ExpenseDecorator) { item.expenses }
 	expose_decorated(:new_user_reckonings, decorator: UserReckoningDecorator) { item.new_user_reckonings }
-	expose_decorated(:expense)
+	expose_decorated(:expense, attributes: :expense_params)
 
 	def index
 	end
@@ -21,7 +21,6 @@ class ExpensesController < ApplicationController
 	end
 
 	def create
-		expense.set_values(params[:expense])
 		if expense.empty?
 			redirect_to item_expenses_path(item)
 		else
@@ -35,7 +34,6 @@ class ExpensesController < ApplicationController
 	end
 
 	def update
-		expense.set_values(params[:expense])
 		if expense.empty?
 			expense.destroy
 			redirect_to reckoning_item_path(reckoning, item)
@@ -66,5 +64,12 @@ class ExpensesController < ApplicationController
 
 		the_rest = (item.cost + paid) - item.used - saved_value
 		render json: to_dolars(the_rest)
+	end
+private
+	def expense_params
+		raw = params.require(:expense).permit(:paid, :used, :user_reckoning_id)
+		raw[:paid] = to_cents(raw[:paid])
+		raw[:used] = to_cents(raw[:used])
+		raw
 	end
 end

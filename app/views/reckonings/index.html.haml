@@ -14,7 +14,7 @@
     - your_reckonings.each do |reckoning|
       %tr
         %td= link_to reckoning, reckoning
-        %td= reckoning.created_at
+        %td= l reckoning.created_at
         %td= reckoning.admin
         %td= link_to "Edit", edit_reckoning_path(reckoning), class: "btn--edit"
         %td= link_to "Remove", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
@@ -36,10 +36,10 @@
     - current_user.invitations.each do |inv|
       %tr
         %td= inv.name
-        %td= inv.created_at
+        %td= l inv.created_at
         %td= inv.admin
         %td= link_to "Accept", reckoning_user_reckonings_path(inv), method: :post, class: "btn--create"
-        %td= link_to "Refuse", "", method: :delete, class: "btn--destroy"
+        %td= link_to "Refuse", reckoning_invitation_path(inv, current_user), method: :delete, class: "btn--destroy", data: { confirm: "Are you sure?" }
 
 %br
 

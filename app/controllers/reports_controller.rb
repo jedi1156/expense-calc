@@ -24,7 +24,7 @@ class ReportsController < ApplicationController
 					out_rest = -s[:flow]
 					while out_rest > 0 && t
 						flow_value = 0
-						new_flow = Flow.new(from_user_reckoning: s[:ur], to_user_reckoning: t[:ur], value: 0, reckoning: reck)
+						new_flow = reck.flows.build(from_user_reckoning: s[:ur], to_user_reckoning: t[:ur], value: 0)
 						if out_rest >= in_rest
 							flow_value = in_rest
 

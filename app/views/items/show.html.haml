@@ -9,7 +9,7 @@
 	%table
 		%tr
 			%th= "Bought at: "
-			%td= item.bought_at
+			%td= l item.bought_at
 		%tr{ class: ("item--warning" unless item.cost_valid?) }
 			%th= "Cost: "
 			%td= item.money_cost

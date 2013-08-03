@@ -11,19 +11,27 @@
 	.form-actions
 		= link_to "Settle-up report", reckoning_report_path(reckoning), method: :post, class: "btn--info"
 		= link_to "Edit", edit_reckoning_path(reckoning), class: "btn--edit"
-		= link_to "Remove", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
+		= link_to "Remove", reckoning, method: :delete, data: { confirm: "Are you sure?" }, class: "btn--destroy"
 .user--list
 	%h4 Users in this reckoning
 	%table
 		- users_in_reckoning.each do |u|
 			%tr
 				%td= u
+				%td
+					= link_to reckoning_user_reckoning_path(reckoning, u.find_user_reckoning(reckoning.id)), method: :delete, data: { confirm: "Are you sure?" }, class: "btn--destroy" do
+						- if u == current_user
+							= "I'm out!"
+						- else
+							= "Kick"
+
 	- unless reckoning.invitations.empty?
 		%h4 Invited
 		%table
 			- reckoning.invitations.each do |u|
 				%tr
 					%td= u
+					%td= link_to "Cancel", reckoning_invitation_path(reckoning, u), method: :delete, data: { confirm: "Are you sure?" }, class: "btn--destroy"
 	= link_to "Invite friends", edit_reckoning_path(reckoning), class: "btn--edit"
 .item--list
 	%h4= link_to "Items bought", reckoning_items_path(reckoning)

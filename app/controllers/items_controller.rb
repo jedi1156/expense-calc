@@ -42,8 +42,8 @@ class ItemsController < ApplicationController
 private
   def item_params
     raw = params.require(:item)
-    bought_at = (1..5).to_a.map { |i| raw.fetch("bought_at(#{i}i)") }
     par = raw.permit(:name, :description)
+    bought_at = (1..5).to_a.map { |i| raw.fetch("bought_at(#{i}i)") }
     par[:bought_at] = Time.new(*bought_at)
     par
   end
