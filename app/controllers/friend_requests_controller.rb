@@ -7,8 +7,8 @@ class FriendRequestsController < ApplicationController
 
 	def create
 		friend_request.from_user = current_user
-		friend_request.to_user = User.find_or_initialize_by(id: params[:friend_id])
-		if !friend_request.to_user.new_record? && friend_request.save
+		user = friend_request.to_user = User.find_or_initialize_by(id: params[:friend_id])
+		if !user.new_record? && (user != current_user) && friend_request.save
 			flash[:notice] = "Sent friend request to #{friend_request.to_user.to_s}"
 		else
 			flash[:error] = "Error, couldn't send that request"

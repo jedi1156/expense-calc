@@ -2,7 +2,12 @@
 # See https://github.com/svenfuchs/rails-i18n/tree/master/rails%2Flocale for starting points.
 
 en:
-  hello: "Hello world"
   time:
     formats:
       default: "%F - %T"
+  hints:
+    expenses:
+      used: "The measure of how much this person used this item. If it's shopping, type the sum cost of your things here, if it's e.g. a taxi ride then split it even."
+      paid: "That much money was paid by this person for this item."
+      user_reckoning: "Choose a reckoning participant that wasn't already covered in this item expenses."
+      rest: "Hit this button to set the 'Used' value to the amount that will make this item valid - so that the total cost and total usage will be equal. Usually hit with the last user."

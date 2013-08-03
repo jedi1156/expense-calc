@@ -7,16 +7,6 @@
 	- (@users - [current_user]).each do |user|
 		%tr
 			%td= link_to user.name, user
-			%td= l user.created_at
+			%td= l (user.created_at || "")
 			%td
-				- if current_user.friends.include? user
-					= "Friend"
-				- elsif fr = current_user.friend_requests_from.detect { |f| f.from_user == user }
-					= "Friend request received"
-					= link_to "Accept", friends_path(friend_request_id: fr.id), method: :post, class: "btn--create"
-					= link_to "Refuse", friend_request_path(fr), method: :delete, data: { confirm: "You'll end up alone this way, are you sure?" }, class: "btn--destroy"
-				- elsif fr = current_user.friend_requests_to.detect { |f| f.to_user == user }
-					= "Friend request sent"
-					= link_to "Resign", friend_request_path(fr), method: :delete, data: { confirm: "Are you sure you don't want to wait any more?" }, class: "btn--destroy"
-				- else
-					= link_to "Request friends", friend_requests_path(friend_id: user.id), method: :post, class: "btn--create"
+				= render "friend_status", user: user

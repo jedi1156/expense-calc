@@ -1,16 +1,22 @@
 %table
   %tr
-    %th User
-    %th Paid
-    %th Used
+    %th= "User"
+    %th
+      = "Paid"
+      = render "expenses/hint_paid", tag: "small", text: "(?)"
+    %th
+      = "Used"
+      = render "expenses/hint_used", tag: "small", text: "(?)"
     %th
     %th
 
   - expenses.each do |expense|
     %tr
       %td= expense.user_reckoning.user
-      %td= expense.money_paid
-      %td= expense.money_used
+      %td
+        %span{ hint: "#{expense.money_paid} was paid by #{expense.user_reckoning.user} for #{expense.item.name}" }= expense.money_paid
+      %td
+        %span{ hint: "The part of #{expense.user_reckoning.user} is #{expense.money_used}. That's the extent to which #{expense.user_reckoning.user} benefited from #{expense.item.name}." }= expense.money_used
       %td
         = link_to "Edit", edit_item_expense_path(item, expense), class: "btn--edit"
         = link_to "Remove", item_expense_path(item, expense), :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"

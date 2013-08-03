@@ -12,7 +12,9 @@
 			= link_to "Edit", edit_reckoning_path(reckoning), class: "btn--edit"
 			= link_to "Remove", reckoning, method: :delete, data: { confirm: "Are you sure?" }, class: "btn--destroy"
 .user--list
-	%h4 Users in this reckoning
+	%h4
+		= "Users in this reckoning"
+		%small= " (#{reckoning.user_reckonings.length})"
 	%table
 		- users_in_reckoning.each do |u|
 			%tr
@@ -35,7 +37,9 @@
 
 	- if can? :manage, reckoning
 		- unless reckoning.invitations.empty?
-			%h4 Invited
+			%h4
+				= "Invited"
+				%small= " (#{reckoning.invitations.length})"
 			%table
 				- reckoning.invitations.each do |u|
 					%tr

@@ -3,12 +3,12 @@
 
 	.form-inputs
 		- if expense.new_record?
-			= f.association :user_reckoning, collection: new_user_reckonings, label_method: :user_name, value_method: :id, selected: new_user_reckonings.first
+			= f.association :user_reckoning, collection: new_user_reckonings, label: "User", label_method: :user_name, value_method: :id, selected: new_user_reckonings.first, input_html: { hint: t("hints.expenses.user_reckoning") }
 		- else
 			= expense.user_name
-		= f.input :paid, input_html: { value: expense.money_paid, class: "expense--paid" }
-		= f.input :used, input_html: { value: expense.money_used, class: "expense--used" }
-		= link_to "Rest", rest_item_expense_path(item, expense_id: expense.id), class: "expense--rest btn--info"
+		= f.input :paid, input_html: { value: expense.money_paid, class: "expense--paid", hint: t("hints.expenses.paid") }
+		= f.input :used, input_html: { value: expense.money_used, class: "expense--used", hint: t("hints.expenses.used") }
+		= link_to "Rest", rest_item_expense_path(item, expense_id: expense.id), class: "expense--rest btn--info", hint: t("hints.expenses.rest")
 
 	.form-actions
 		= f.button :submit

@@ -14,3 +14,17 @@
 //= require jquery_ujs
 //= require bootstrap
 //= require_tree .
+
+$(function(){
+	$("[hint]").each(function(){
+		var $this = $(this)
+			,	hint = $this.attr("hint");
+
+			if (!$this.data("placement")) {
+				$this.data("placement", "right")
+			}
+			$this.data("title", hint)
+				.data("toggle", "tooltip")
+				.tooltip();
+	})
+});

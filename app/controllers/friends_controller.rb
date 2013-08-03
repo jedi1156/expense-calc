@@ -1,5 +1,5 @@
 class FriendsController < ApplicationController
-	expose(:friend_request) { FriendRequest.find_or_initalize_by(id: params[:friend_request_id]) }
+	expose(:friend_request) { FriendRequest.find_or_initialize_by(id: params[:friend_request_id]) }
 	expose(:friend) { current_user.friends.detect { |f| f.id.to_s == params[:id] } }
 	expose(:requested_friend) { friend_request.friend(current_user) }
 	expose(:user_friends) { current_user.friends }
@@ -7,7 +7,7 @@ class FriendsController < ApplicationController
 	authorize_resource :friend_request, decent_exposure: true, only: [ :create ]
 
 	def create
-		if requested_friend
+		if requested_friend && (requested_friend != current_user)
 			current_user.friends.push(requested_friend)
 			current_user.save
 			requested_friend.friends.push(current_user)
