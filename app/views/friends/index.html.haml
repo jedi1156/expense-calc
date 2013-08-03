@@ -5,4 +5,7 @@
 		%tr
 			%td= f
 			%td= link_to "Unfriend", friend_path(f), method: :delete, data: { confirm: "Are you insane!? Think twice before doing that!" }, class: "btn--destroy"
-= link_to "See friend requests", friend_requests_path, class: "btn--edit"
+= link_to friend_requests_path, class: "btn--edit" do
+	= "See friend requests"
+	- unless current_user.friend_requests_from.empty?
+		%li.badge= current_user.friend_requests_from.length

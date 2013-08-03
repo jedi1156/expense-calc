@@ -6,7 +6,7 @@
 		%b Created at:
 		= l reckoning.created_at
 	%p
-		= reckoning.description
+		= reckoning.multiline_description
 
 	.form-actions
 		= link_to "Settle-up report", reckoning_report_path(reckoning), method: :post, class: "btn--info"

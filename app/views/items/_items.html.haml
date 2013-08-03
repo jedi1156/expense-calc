@@ -15,8 +15,8 @@
 	- valid = false
 	- items.each do |item|
 		- valid = item.cost_valid?
-		%tr
-			%td{ class: ("item--warning" unless valid) }= (i += 1)
+		%tr{ class: ("item--warning" unless valid) }
+			%td= (i += 1)
 			%td
 				%big= link_to item, reckoning_item_path(reckoning, item)
 			%td= item.bought_at ? (l item.bought_at) : ""

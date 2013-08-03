@@ -3,7 +3,7 @@
 
 	.reckoning--form-inputs
 		= f.input :name
-		= f.input :description, as: :text
+		= f.input :description, as: :text, input_html: { class: "span6", rows: 15 }
 
 	- unless new_invitations.empty?
 		.user--list

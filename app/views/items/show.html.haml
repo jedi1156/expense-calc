@@ -1,35 +1,44 @@
-%h3
+%h3{ class: ("item--warning" unless item.cost_valid?) }= item
+%h5
 	= "Item in reckoning: "
 	= link_to reckoning, reckoning
-%h3= item
-- unless item.cost_valid?
-	%p.item--warning
-		= "This item is invalid and won't be counted in the reckoning!"
-		%br
-		= "Try using 'Rest' button while editing expenses to calculate the remaining usage."
-		%br
-		%b Used:
-		= item.money_used
-%table
-	%tr
-		%th= "Bought at: "
-		%td= item.bought_at
-	%tr
-		%th= "Cost: "
-		%td= item.money_cost
-	%tr
-		%th= "You paid: "
-		%td= item.money_paid_by(current_user_reckoning)
-	%tr
-		%th= "You used: "
-		%td= item.money_used_by(current_user_reckoning)
-	%tr{ class: ("item--warning" unless item.positive_balance_of?(current_user_reckoning)) }
-		%th= "Your balance: "
-		%td= item.balance_of(current_user_reckoning)
+.span6.pull-left
+	%p= item.multiline_description
+.span4.pull-right
+	
+	%table
+		%tr
+			%th= "Bought at: "
+			%td= item.bought_at
+		%tr{ class: ("item--warning" unless item.cost_valid?) }
+			%th= "Cost: "
+			%td= item.money_cost
+		%tr{ class: ("item--warning" unless item.cost_valid?) }
+			%th= "Used:"
+			%td= item.money_used
+		%tr
+			%th= "You paid: "
+			%td= item.money_paid_by(current_user_reckoning)
+		%tr
+			%th= "You used: "
+			%td= item.money_used_by(current_user_reckoning)
+		%tr{ class: ("item--warning" unless item.positive_balance_of?(current_user_reckoning)) }
+			%th= "Your balance: "
+			%td= item.balance_of(current_user_reckoning)
+	- unless item.cost_valid?
+		.panel.panel-danger
+			.panel-header
+				%h3.panel-title= "Invalid item expenses"
+			%p
+				= "This item is invalid and won't be included in the reckoning!"
+				= "Total 'paid' expenses (Cost) must be equal to total 'used' expenses (Used)."
+				%br
+				%b= "Tip: "
+				= "Try using 'Rest' button while editing expenses to calculate the remaining usage."
+.footer
+	= link_to "Edit", edit_reckoning_item_path(reckoning, item), class: "btn--edit"
+	= link_to "Remove", reckoning_item_path(reckoning, item), :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
+	= link_to "Back", reckoning_items_path(reckoning), class: "btn--back"
 
-= link_to "Edit", edit_reckoning_item_path(reckoning, item), class: "btn--edit"
-= link_to "Remove", reckoning_item_path(reckoning, item), :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
-= link_to "Back", reckoning_items_path(reckoning), class: "btn--back"
-
-%h4= link_to "Expenses", item_expenses_path(item)
-= render "expenses/expenses", expenses: expenses
+	%h4= link_to "Expenses", item_expenses_path(item)
+	= render "expenses/expenses", expenses: expenses

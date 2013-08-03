@@ -63,3 +63,27 @@ table {
   @extend .table;
   @extend .table-striped;
 }
+
+.footer {
+  clear: both;
+}
+
+.boolean {
+  input[type=checkbox] {
+    margin-left: 10px;
+  }
+}
+
+.panel-danger {
+  @extend alert-error;
+  border-radius: 10px;
+  border: 1px solid $warning_color;
+  background-color: $warning_color_light;
+  padding: 6px;
+  color: $warning_color;
+  .panel-title {
+    padding: 6px;
+    border-radius: 10px;
+    text-align: center;
+  }
+}

@@ -29,4 +29,8 @@ class ItemDecorator < Draper::Decorator
   def to_s
     name
   end
+
+  def multiline_description
+    description.gsub(/\n/, "<br>").html_safe
+  end
 end

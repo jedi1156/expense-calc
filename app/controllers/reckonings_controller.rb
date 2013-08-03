@@ -3,7 +3,7 @@ class ReckoningsController < ApplicationController
   expose_decorated(:your_reckonings, decorator: ReckoningDecorator) { current_user.user_reckonings.map { |r| r.reckoning } }
   expose(:users_in_reckoning) { reckoning.user_reckonings.map { |ur| ur.user } }
   expose(:new_invitations) { current_user.friends - reckoning.users }
-  expose_decorated(:items) { reckoning.items }
+  expose_decorated(:items) { reckoning.items.sort_by { |it| it.bought_at || Time.now } }
   expose(:current_user_reckoning) { current_user.find_user_reckoning(reckoning.id) }
   
   def index
