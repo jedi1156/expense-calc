@@ -29,7 +29,7 @@ class ExpensesController < ApplicationController
 			if expense.save
 				redirect_to reckoning_item_path(reckoning, item)
 			else
-				redirect_to action: :new
+				render action: :new
 			end
 		end
 	end
@@ -42,7 +42,7 @@ class ExpensesController < ApplicationController
 		elsif expense.save
 			redirect_to reckoning_item_path(reckoning, item)
 		else
-			redirect_to action: :edit
+			render action: :edit
 		end
 	end
 

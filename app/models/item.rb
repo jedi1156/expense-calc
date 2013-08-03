@@ -2,11 +2,14 @@ class Item
   include Mongoid::Document
   include MoneyRoutines
   field :name, type: String
-  field :description, type: String
+  field :description, type: String, default: ""
   field :bought_at, type: Time, default: Time.now
 
   belongs_to :reckoning
   has_many :expenses, dependent: :destroy
+
+  validates :name, presence: true
+  validates :reckoning, presence: true
 
   def cost
   	@cost ||= expenses.inject(0) { |mem, it| mem + it.paid }

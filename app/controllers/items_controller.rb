@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
     if item.save
       redirect_to reckoning_item_path(reckoning, item)
     else
-      redirect_to action: :new
+      render action: :new
     end
   end
 
@@ -31,7 +31,7 @@ class ItemsController < ApplicationController
     if item.save
       redirect_to reckoning_item_path(reckoning, item)
     else
-      redirect_to action: :edit
+      render action: :edit
     end
   end
 

@@ -1,15 +1,18 @@
 class Reckoning
 	include Mongoid::Document
 	field :name, type: String
-	field :description, type: String
+	field :description, type: String, default: ""
 	field :created_at, type: Time, default: Time.current
 	field :report_generated_at, type: Time
+
 
 	has_many :user_reckonings, dependent: :destroy
 	has_many :items, dependent: :destroy
 	has_many :flows, dependent: :destroy
 
 	has_and_belongs_to_many :invitations, class_name: "User", inverse_of: :invitations
+	
+	validates :name, presence: true
 
 	def users
 		user_reckonings.map { |ur| ur.user }

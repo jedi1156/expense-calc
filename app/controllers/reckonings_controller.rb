@@ -25,7 +25,7 @@ class ReckoningsController < ApplicationController
       ur.save
       redirect_to reckoning
     else
-      redirect_to action: :new
+      render action: :new
     end
   end
 
@@ -33,7 +33,7 @@ class ReckoningsController < ApplicationController
     if reckoning.save
       redirect_to reckoning
     else
-      redirect_to action: :edit
+      render action: :edit
     end
   end
 
