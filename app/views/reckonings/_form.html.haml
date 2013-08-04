@@ -1,15 +1,15 @@
 = simple_form_for(reckoning) do |f|
 	= f.error_notification
 	.reckoning--form-inputs
-		= f.input :name
-		= f.input :description, as: :text, input_html: { class: "span6", rows: 15 }
+		= f.input :name, label: t("t.reckonings.name")
+		= f.input :description, label: t("t.reckonings.description"), as: :text, input_html: { class: "span6", rows: 15 }
 
 	- unless new_invitations.empty?
 		.user--list
-			%h4 You may invite some of your friends:
-			= f.association :invitations, collection: new_invitations, as: :check_boxes, include_blank: false
+			%h4= t("text.invitations.you_may_invite")
+			= f.association :invitations, label: "", collection: new_invitations, as: :check_boxes, include_blank: false
 
 	.reckoning--form-actions
-		= f.button :submit
+		= f.button :submit, t(action_name == "edit" ? "text.nav.update" : "text.nav.create")
 
 

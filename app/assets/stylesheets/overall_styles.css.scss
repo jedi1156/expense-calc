@@ -66,6 +66,11 @@ body {
 table {
   @extend .table;
   @extend .table-striped;
+
+  th, td {
+    min-width: 5em;
+    text-align: center;
+  }
 }
 
 .footer {
@@ -79,7 +84,6 @@ table {
 }
 
 .panel-danger {
-  @extend alert-error;
   border-radius: 10px;
   border: 1px solid $warning_color;
   background-color: $warning_color_light;

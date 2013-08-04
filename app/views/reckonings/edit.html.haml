@@ -1,6 +1,6 @@
-%h1 Editing reckoning
+%h1= t("text.reckonings.edit")
 
 = render "form"
 
-= link_to "Remove", reckoning, :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
-= link_to "Back", reckoning, class: "btn--back"
+= link_to t("text.nav.remove"), reckoning, method: :delete, data: { confirm: t("hints.you_sure") }, class: "btn--destroy"
+= link_to t("text.nav.back"), reckoning, class: "btn--back"

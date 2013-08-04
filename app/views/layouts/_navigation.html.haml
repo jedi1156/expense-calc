@@ -3,23 +3,23 @@
     .container
       %ul.nav
         %li
-          = link_to "expense-calc", root_path, class: "navbar-brand"
+          = link_to t("app_name"), root_path, class: "navbar-brand"
         - if user_signed_in?
           %li{ class: is?("devise/registrations") }
-            = link_to "Edit account (#{current_user})", edit_user_registration_path
+            = link_to t("text.users.edit_account") + " (#{current_user})", edit_user_registration_path
           %li{ class: is?("users") }
-            = link_to "Users", users_path
+            = link_to t("text.users.users"), users_path
           %li{ class: is?("friends") }
-            = link_to "Friends", friends_path
+            = link_to t("text.users.friends"), friends_path
           - unless current_user.friend_requests_from.empty?
             %li.badge= current_user.friend_requests_from.length
           %li{ class: is?("reckonings") }
-            = link_to "Reckonings", reckonings_path
+            = link_to t("text.reckonings.reckonings"), reckonings_path
           - unless current_user.invitations.empty?
             %li.badge= current_user.invitations.length
           %li.logout-button
-            = link_to "Logout", destroy_user_session_path, method: "delete"
+            = link_to t("text.nav.logout"), destroy_user_session_path, method: "delete"
         - else
           %li.login-button
-            = link_to "Login", new_user_session_path
+            = link_to t("text.nav.login"), new_user_session_path
 

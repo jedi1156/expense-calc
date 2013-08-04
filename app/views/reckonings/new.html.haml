@@ -1,5 +1,5 @@
-%h1 New reckoning
+%h1= t("text.reckonings.new")
 
-= render 'form'
+= render "form"
 
-= link_to 'Back', reckonings_path, class: "btn--back"
+= link_to t("text.nav.back"), reckonings_path, class: "btn--back"

@@ -19,11 +19,11 @@ class ItemDecorator < Draper::Decorator
   end
 
   def balance_of(user_reckoning)
-    to_dolars(expense_of(user_reckoning).value)
+    to_dolars(-expense_of(user_reckoning).value)
   end
 
   def positive_balance_of?(user_reckoning)
-    expense_of(user_reckoning).value >= 0
+    expense_of(user_reckoning).value > 0
   end
 
   def to_s

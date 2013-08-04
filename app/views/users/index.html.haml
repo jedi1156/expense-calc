@@ -1,9 +1,9 @@
-%h3 Users
+%h3= t("text.users.users")
 %table.users
 	%tr
-		%th Name
-		%th Signed up
-		%th Friend status
+		%th= t("text.users.name")
+		%th= t("text.users.signed_up")
+		%th= t("text.users.friend_status")
 	- (@users - [current_user]).each do |user|
 		%tr
 			%td= link_to user.name, user

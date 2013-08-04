@@ -21,11 +21,11 @@ class ReckoningDecorator < Draper::Decorator
 	end
 
 	def total_money_balance_of(user_reckoning)
-		to_dolars(total_balance_of(user_reckoning))
+		to_dolars(-total_balance_of(user_reckoning))
 	end
 
 	def total_balance_positive?(user_reckoning)
-		total_balance_of(user_reckoning) >= 0
+		total_balance_of(user_reckoning) > 0
 	end
 
 	def to_s

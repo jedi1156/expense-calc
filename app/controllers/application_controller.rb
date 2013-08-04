@@ -10,19 +10,13 @@ class ApplicationController < ActionController::Base
 	include MoneyRoutines
 
 
-
 	rescue_from CanCan::AccessDenied do |exception|
-		log_error
+		logger.error exception
 		render "home/403"
 	end
 
 	rescue_from Mongoid::Errors::DocumentNotFound do |exception|
-		log_error
-		render "home/404"
-	end
-
-private
-	def log_error
 		logger.error exception
+		render "home/404"
 	end
 end

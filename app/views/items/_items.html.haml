@@ -1,13 +1,23 @@
 %table
 	%tr
 		%th
-		%th Name
-		%th Bought at
-		%th Cost
-		%th Valid
-		%th You paid
-		%th You used
-		%th Your balance
+		%th= t("text.items.name")
+		%th= t("text.items.bought at")
+		%th
+			= t("text.items.cost")
+			= render "layouts/hint", tag: "small", hint: t("hints.expenses.cost"), text: "(?)"
+		%th
+			= t("text.items.is_valid")
+			= render "layouts/hint", tag: "small", hint: t("hints.expenses.is_valid"), text: "(?)"
+		%th
+			= t("text.items.you_paid")
+			= render "layouts/hint", tag: "small", hint: t("hints.expenses.you_paid"), text: "(?)"
+		%th
+			= t("text.items.you_used")
+			= render "layouts/hint", tag: "small", hint: t("hints.expenses.you_used"), text: "(?)"
+		%th
+			= t("text.items.your_balance")
+			= render "layouts/hint", tag: "small", hint: t("hints.expenses.your_balance"), text: "(?)"
 		%th
 		%th
 
@@ -22,24 +32,32 @@
 			%td= item.date_of_purchase
 			%td= item.money_cost
 			- if valid
-				%td= "Yes"
+				%td= t("text.items.valid")
 			- else
 				%td{ class: "item--warning" }= item.money_used
 			%td= item.money_paid_by(current_user_reckoning)
 			%td= item.money_used_by(current_user_reckoning)
-			%td{ class: ("item--warning" unless item.positive_balance_of?(current_user_reckoning)) }
+			%td{ class: ("item--warning" if item.positive_balance_of?(current_user_reckoning)) }
 				= item.balance_of(current_user_reckoning)
-			%td= link_to "Edit", edit_reckoning_item_path(reckoning, item), class: "btn--edit"
-			%td= link_to "Remove", reckoning_item_path(reckoning, item), :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
+			%td= link_to t("text.nav.edit"), edit_reckoning_item_path(reckoning, item), class: "btn--edit"
+			%td= link_to t("text.nav.remove"), reckoning_item_path(reckoning, item), method: :delete, data: { confirm: t("hints.you_sure") }, class: "btn--destroy"
 	%tr
-		%th Total
+		%th= t("text.items.total")
 		%th
 		%th
-		%th Cost
 		%th
-		%th Money you paid
-		%th Money you used
-		%th Your balance
+			= t("text.items.cost")
+			= render "layouts/hint", tag: "small", hint: t("hints.items.total_cost"), text: "(?)"
+		%th
+		%th
+			= t("text.items.money_you_paid")
+			= render "layouts/hint", tag: "small", hint: t("hints.items.total_paid"), text: "(?)"
+		%th
+			= t("text.items.money_you_used")
+			= render "layouts/hint", tag: "small", hint: t("hints.items.total_used"), text: "(?)"
+		%th
+			= t("text.items.your_balance")
+			= render "layouts/hint", tag: "small", hint: t("hints.items.your_balance"), text: "(?)"
 	%tr
 		%td= i
 		%td
@@ -48,7 +66,7 @@
 		%td
 		%td= reckoning.total_money_paid_by(current_user_reckoning)
 		%td= reckoning.total_money_usage_by(current_user_reckoning)
-		%td{ class: ("item--warning" unless reckoning.total_balance_positive?(current_user_reckoning)) }
+		%td{ class: ("item--warning" if reckoning.total_balance_positive?(current_user_reckoning)) }
 			= reckoning.total_money_balance_of(current_user_reckoning)
 
 
@@ -57,4 +75,4 @@
 
 = link_to new_reckoning_item_path(reckoning), class: "btn--create" do
 	%i{ class: "icon-plus icon-white" }
-	%span= "New Item"
+	%span= t("text.items.new")

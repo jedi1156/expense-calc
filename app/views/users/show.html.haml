@@ -1,6 +1,6 @@
 - if @user == current_user
-	%p= "It's you!"
+	%p= t("text.users.you")
 -else
 	%h3= @user.name
-	%h4= "Friend status: "
+	%h4= t("text.users.friend_status") + ": "
 	= render "friend_status", user: @user

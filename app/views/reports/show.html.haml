@@ -1,22 +1,22 @@
 %h3
-	= "Settle-up report for "
+	= t("text.reckonings.report")
 	= link_to reckoning, reckoning
 - if reckoning.report_generated_at
 	%p 
-		Generated at: 
+		= t("text.reckonigs.report_generated_at")
 		= l reckoning.report_generated_at
 .form-actions
-	= link_to "Reload", reckoning_report_path(reckoning), method: :post, class: "btn--info"
-	= link_to "Back to reckoning", reckoning_path(reckoning), class: "btn--back"
+	= link_to t("text.reckonings.report_reload"), reckoning_report_path(reckoning), method: :post, class: "btn--info"
+	= link_to t("text.nav.back_to_reckoning"), reckoning_path(reckoning), class: "btn--back"
 
 - if flows.empty?
-	%h4= "No transfers needed"
+	%h4= t("text.no_transfers_needed")
 - else
 	%table
 		%tr
-			%th This user...
-			%th ...should pay this user...
-			%th ...that much
+			%th= t("text.reckonings.report_from_user")
+			%th= t("text.reckonings.report_to_user")
+			%th= t("text.reckonings.report_transfer_value")
 		- flows.each do |fl|
 			%tr
 				%td= fl.from

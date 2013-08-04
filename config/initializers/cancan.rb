@@ -13,7 +13,6 @@ module CanCan
     end
 
     def use_decent_exposure?
-      binding.pry
       @options[:decent_exposure] && @controller.respond_to?(instance_name)
     end
 

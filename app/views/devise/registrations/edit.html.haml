@@ -1,17 +1,16 @@
 .edit-user
   %h2
-    Edit #{resource_name.to_s.humanize}
+    = "Edit #{t("text.users.user").downcase}"
   = simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put, class: 'form-vertical' }) do |f|
     = f.error_notification
     = display_base_errors resource
     = f.input :name, autofocus: true
     = f.input :email, required: true
-    = f.input :password, autocomplete: "off", required: false, input_html: { hint: "Leave it blank if you don't want to change it" } 
+    = f.input :password, autocomplete: "off", required: false, input_html: { hint: t("hints.users.password") }
     = f.input :password_confirmation, required: false
-    = f.input :current_password, required: true, input_html: { hint: "We need your current password to confirm your changes" }
-    = f.button :submit, 'Update', class: 'btn-primary'
-  %h3 Cancel my account
+    = f.input :current_password, required: true, input_html: { hint: t("hints.users.current_password") }
+    = f.button :submit, t("text.nav.update"), class: 'btn-primary'
+  %h3= t("text.users.cancel_account")
   %p
-    ="Unhappy?"
-    = link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete, class: "btn--destroy"
-  = link_to "Back", :back, class: "btn--back"
+    = t("text.users.unhappy")
+    = link_to t("text.users.cancel_account"), registration_path(resource_name), data: { confirm: t("hints.users.dont") }, method: :delete, class: "btn--destroy"

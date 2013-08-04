@@ -1,6 +1,6 @@
 %h3
-	= "Items of"
+	= t("text.items.of")
 	= link_to reckoning, reckoning
 
 = render "items", items: sorted_items
-= link_to "Back", reckoning, class: "btn--back"
+= link_to t("text.nav.back"), reckoning, class: "btn--back"

@@ -1,7 +1,7 @@
-%h1 Editing item
+%h1= t("text.items.edit")
 
 = render "form"
 
-= link_to "Show this item", reckoning_item_path(reckoning, item), class: "btn--info"
-= link_to "Remove", reckoning_item_path(reckoning, item), :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
-= link_to "Back", reckoning_items_path(reckoning), class: "btn--back"
+= link_to t("text.items.show"), reckoning_item_path(reckoning, item), class: "btn--info"
+= link_to t("text.nav.remove"), reckoning_item_path(reckoning, item), method: :delete, data: { confirm: t("hints.you_sure") }, class: "btn--destroy"
+= link_to t("text.nav.back"), reckoning_items_path(reckoning), class: "btn--back"

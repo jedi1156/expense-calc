@@ -1,5 +1,5 @@
-%h1 Edit expense
+%h1= t("text.expenses.edit")
 
 = render "form"
 
-= link_to "Remove", item_expense_path(item, expense), :method => :delete, :data => { :confirm => "Are you sure?" }, class: "btn--destroy"
+= link_to t("text.nav.remove"), item_expense_path(item, expense), method: :delete, data: { confirm: t("hints.you_sure") }, class: "btn--destroy"

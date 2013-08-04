@@ -21,6 +21,13 @@ class UserReckoningsController < ApplicationController
 		if (f = reckoning.user_reckonings.empty?)
 			reckoning.destroy
 		end
+
+		if !f && reckoning.admins.empty?
+			ur = reckoning.user_reckonings.first
+			ur.admin_rights = true
+			ur.save
+		end
+
 		if f || (user_reckoning.user == current_user)
 			redirect_to reckonings_path
 		else

@@ -1,13 +1,12 @@
-%h2
-	Your friends
+%h2= t("text.users.your_friends")
 %table
 	- user_friends.each do |f|
 		%tr
 			%td= f
-			%td= link_to "Unfriend", friend_path(f), method: :delete, data: { confirm: "Are you insane!? Think twice before doing that!" }, class: "btn--destroy"
+			%td= link_to t("text.users.unfriend"), friend_path(f), method: :delete, data: { confirm: t("hints.users.dont2") }, class: "btn--destroy btn-mini", hint: t("hints.users.dont")
 - unless current_user.friend_requests_from.empty?
 	= link_to friend_requests_path, class: "btn--edit" do
-		= "See friend requests"
+		= t("text.users.see_friend_requests")
 		%li.badge= current_user.friend_requests_from.length
 - else
-	= "You have no friend requests"
+	= t("text.users.no_friend_requests")

@@ -2,9 +2,9 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :name
-    = f.input :description, as: :text, input_html: { class: "span6", rows: 10 }
-    = f.input :bought_at, as: :datetime
+    = f.input :name, label: t("text.items.name")
+    = f.input :description, label: t("text.items.description"), as: :text, input_html: { class: "span6", rows: 10 }
+    = f.input :bought_at, label: t("text.items.bought_at"), as: :datetime
 
   .form-actions
-    = f.button :submit
+    = f.button :submit, t(action_name == "edit" ? "text.nav.update" : "text.nav.create")
