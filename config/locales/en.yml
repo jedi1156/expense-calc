@@ -3,6 +3,8 @@ en:
     formats:
       default: "%F - %T"
   app_name: "expense-calc"
+  email: "jedi1156@gmail.com"
+  github: "https://github.com/jedi1156/expense-calc"
   inter: "%{name}"
   hints:
     expenses:
@@ -37,6 +39,14 @@ en:
     you_sure: "Are you sure?"
     tip: "Tip"
   text:
+    abouts:
+      about: "About"
+      contribute: "Contribute"
+      github: "If you are programmer and you want to make some feature, or maybe you have some propositions please visit this %{link}, fork me and we'll see what we can do together :)"
+      header: "Do you like this site?"
+      repo: "repo"
+      send_email: "Send me an email"
+      why_email: "... if you want to give me feedback. My address is: %{email}"
     expenses:
       edit: "Edit expense"
       expenses: "Expenses"

@@ -1,0 +1,5 @@
+%h1= t("text.abouts.header")
+%h4= t("text.abouts.send_email")
+%p= t("text.abouts.why_email", email: link_to(t("email"), "mailto:#{t('email')}")).html_safe
+%h4= t("text.abouts.contribute")
+%p= t("text.abouts.github", link: link_to(t("text.abouts.repo"), t("github"))).html_safe

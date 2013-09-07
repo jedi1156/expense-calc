@@ -17,6 +17,10 @@
             = link_to t("text.reckonings.reckonings"), reckonings_path
           - unless current_user.invitations.empty?
             %li.badge= current_user.invitations.length
+        %li{ class: is?("abouts") }
+          = link_to t("text.abouts.about"), about_path
+
+        - if user_signed_in?
           %li.logout-button
             = link_to t("text.nav.logout"), destroy_user_session_path, method: "delete"
         - else
