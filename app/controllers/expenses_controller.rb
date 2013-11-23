@@ -67,6 +67,36 @@ class ExpensesController < ApplicationController
 		the_rest = (item.cost + paid) - item.used - saved_value
 		render json: to_dolars(the_rest)
 	end
+
+	def even
+		cost = item.cost
+		if cost > 0
+			user_count = reckoning.user_reckonings.count
+			user_cost = (cost / user_count).to_i
+			rest = cost - user_cost * user_count
+			item.expenses.each do |expense|
+				if rest > 0
+					r = 1
+					rest -= 1
+				else
+					r = 0
+				end
+				expense.update_attributes used: user_cost + r
+			end
+
+			item.new_user_reckonings do |user_reckoning|
+				if rest > 0
+					r = 1
+					rest -= 1
+				else
+					r = 0
+				end
+				Expense.create paid: 0, used: user_cost + r, user_reckoning: user_reckoning
+			end
+		end
+
+		redirect_to reckoning_item_path(reckoning, item)
+	end
 private
 	def expense_params
 		raw = params.require(:expense).permit(:paid, :used, :user_reckoning_id)

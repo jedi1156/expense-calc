@@ -80,6 +80,7 @@ en:
       cost: "Cost"
       description: "Description"
       edit: "Editing item"
+      even: "Even"
       in: "Item in reckoning: "
       is_valid: "Valid"
       items_bought: "Items bought"

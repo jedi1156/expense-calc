@@ -7,11 +7,12 @@
 	.form-actions
 		= link_to t("text.nav.edit"), edit_reckoning_item_path(reckoning, item), class: "btn--edit"
 		= link_to t("text.nav.remove"), reckoning_item_path(reckoning, item), method: :delete, data: { confirm: t("hints.you_sure") }, class: "btn--destroy"
+		= link_to t("text.expenses.even"), even_item_path(reckoning, item), class: "btn--info"
 		= link_to t("text.nav.back"), reckoning_items_path(reckoning), class: "btn--back"
 
 	%h4= link_to t("text.expenses.expenses"), item_expenses_path(item)
 	= render "expenses/expenses", expenses: expenses
-	
+
 .span4.pull-right
 	%table
 		%tr
