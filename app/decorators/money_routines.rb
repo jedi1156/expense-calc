@@ -4,6 +4,6 @@ module MoneyRoutines
 	end
 
 	def to_cents(money)
-		(money.to_f * 100).to_i
+		(money.to_f * 100).round
 	end
 end
