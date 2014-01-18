@@ -73,7 +73,7 @@ class ExpensesController < ApplicationController
 		if cost > 0
 			user_count = reckoning.user_reckonings.count
 			user_cost = (cost / user_count).to_i
-			rest = cost - user_cost * user_count
+			rest = cost % user_count
 			item.expenses.each do |expense|
 				if rest > 0
 					r = 1
@@ -84,14 +84,14 @@ class ExpensesController < ApplicationController
 				expense.update_attributes used: user_cost + r
 			end
 
-			item.new_user_reckonings do |user_reckoning|
+			item.new_user_reckonings.each do |user_reckoning|
 				if rest > 0
 					r = 1
 					rest -= 1
 				else
 					r = 0
 				end
-				Expense.create paid: 0, used: user_cost + r, user_reckoning: user_reckoning
+				item.expenses << Expense.new(paid: 0, used: user_cost + r, user_reckoning: user_reckoning)
 			end
 		end
 

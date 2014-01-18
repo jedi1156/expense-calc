@@ -19,9 +19,12 @@ ExpenseCalc::Application.routes.draw do
 	post "/reckoning/:reckoning_id/user_reckonings/:id/make_admin", to: "user_reckonings#make_admin", as: :make_admin_reckoning_user_reckoning
 
 	resources :items do
-		resources :expenses
+		resources :expenses do
+			collection do
+				post :even
+			end
+		end
 	end
 	get "/item/:item_id/expenses/rest", to: "expenses#rest", as: :rest_item_expense
-	get "/item/:item_id/expenses/even", to: "expenses#even", as: :even_item
 
 end

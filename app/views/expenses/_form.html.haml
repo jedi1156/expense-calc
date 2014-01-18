@@ -9,7 +9,7 @@
 		= f.input :paid, label: t("text.expenses.paid"), input_html: { value: expense.money_paid, class: "expense--paid", label: t("text.expenses.used"), hint: t("hints.expenses.paid") }
 		= f.input :used, label: t("text.expenses.used"), input_html: { value: expense.money_used, class: "expense--used", hint: t("hints.expenses.used") }
 		= link_to t("text.expenses.rest"), rest_item_expense_path(item, expense_id: expense.id), class: "expense--rest btn--info", hint: t("hints.expenses.rest")
-		= link_to t("text.expenses.even"), even_item_path(reckoning, item), class: "btn--info"
+		= link_to t("text.expenses.even"), even_item_expenses_path(item), method: :post, class: "btn--info"
 
 	.form-actions
 		= f.button :submit, t(action_name == "edit" ? "text.nav.update" : "text.nav.create")

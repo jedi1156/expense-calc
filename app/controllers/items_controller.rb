@@ -41,6 +41,7 @@ class ItemsController < ApplicationController
     flash[:error] = "Cannot remove that" unless item.destroy
     redirect_to action: :index
   end
+  
 private
   def item_params
     raw = params.require(:item)
